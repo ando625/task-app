@@ -50,6 +50,30 @@
                 @enderror
             </div>
 
+            {{-- 期限 --}}
+            <div class="mb-4">
+                <label for="due_at" class="block text-gray-700 font-medium mb-2">期限</label>
+                <input type="datetime-local" name="due_at" id="due_at"
+                    value="{{ old('due_at', $task->due_at ? \Carbon\Carbon::parse($task->due_at)->format('Y-m-d\TH:i') : '') }}"
+                    class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500">
+                @error('due_at')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
+            
+            {{-- 進捗度（ステータス） --}}
+            <div class="mb-4">
+                <label for="status" class="block text-gray-700 font-medium mb-2">進捗度</label>
+                <select name="status" id="status"
+                    class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:border-blue-500">
+                    <option value="todo" {{ old('status', $task->status) == 'todo' ? 'selected' : '' }}>未着手</option>
+                    <option value="in_progress" {{ old('status', $task->status) == 'in_progress' ? 'selected' : '' }}>進行中</option>
+                    <option value="completed" {{ old('status', $task->status) == 'completed' ? 'selected' : '' }}>完了</option>
+                </select>
+                @error('status')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+            </div>
             {{-- 説明 --}}
             <div class="mb-6">
                 <label for="description" class="block text-gray-700 font-medium mb-2">説明</label>

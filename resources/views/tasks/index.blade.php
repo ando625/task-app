@@ -35,6 +35,29 @@
                                     @else 低
                                     @endif
                                 </span>
+
+                                {{-- ★追加：進捗度（ステータス）表示 --}}
+                                <span class="px-2 py-1 text-xs rounded font-medium
+                                    @if($task->status === 'completed') bg-gray-100 text-gray-700
+                                    @elseif($task->status === 'in_progress') bg-blue-100 text-blue-800
+                                    @else bg-purple-100 text-purple-800
+                                    @endif">
+                                    @if($task->status === 'completed') 完了
+                                    @elseif($task->status === 'in_progress') 進行中
+                                    @else 未着手
+                                    @endif
+                                </span>
+
+                                {{-- ★追加：期限表示 --}}
+                                @if($task->due_at)
+                                <span class="text-xs text-gray-500 flex items-center">
+                                    📅 期限：{{ \Carbon\Carbon::parse($task->due_at)->format('Y/m/d H:i') }}
+                                </span>
+                                @else
+                                <span class="text-xs text-gray-400">
+                                    📅 期限なし
+                                </span>
+                                @endif
                             </div>
                         </div>
                         <a href="{{route('tasks.edit', $task)}}" class="bg-gray-500 hover:bg-gray-600 text-white px-3 py-1 rounded text-sm">
