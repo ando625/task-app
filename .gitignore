@@ -17,3 +17,10 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# カバレッジレポート（テスト結果フォルダ）を無視する
+coverage/
+html-coverage/
+.phpunit.cache/
+coverage.xml
+clover.xml
