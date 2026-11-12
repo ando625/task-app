@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use App\Models\Category;
 use App\Models\Task;
@@ -13,7 +14,7 @@ class CategoryControllerTest extends TestCase
 {
     use RefreshDatabase;
     
-    /** @test */
+    #[Test]
     public function ユーザーはカテゴリー一覧を取得できる(): void
     {
         $user = User::factory()->create();
@@ -25,7 +26,7 @@ class CategoryControllerTest extends TestCase
         $response->assertViewHas('categories');
     }
 
-    /** @test */
+    #[Test]
     public function ユーザーはカテゴリー詳細を取得できる(): void
     {
         $user = User::factory()->create();
@@ -37,7 +38,7 @@ class CategoryControllerTest extends TestCase
         $response->assertViewHas('category');
     }
 
-    /** @test */
+    #[Test]
     public function ユーザーはカテゴリー作成画面を取得できる(): void
     {
         $user = User::factory()->create();
@@ -47,7 +48,7 @@ class CategoryControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+    #[Test]
     public function ユーザーはカテゴリーを作成できる(): void
     {
         $user = User::factory()->create();
@@ -62,7 +63,7 @@ class CategoryControllerTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function カテゴリー名が空だとバリデーションエラーになる(): void
     {
         $user = User::factory()->create();
@@ -74,7 +75,7 @@ class CategoryControllerTest extends TestCase
         $response->assertSessionHasErrors('name');
     }
 
-    /** @test */
+    #[Test]
     public function カテゴリー名は255文字まで入力できる(): void
     {
         $user = User::factory()->create();
@@ -89,7 +90,7 @@ class CategoryControllerTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function カテゴリー名が256文字以上だとバリデーションエラーになる(): void
     {
         $user = User::factory()->create();
@@ -101,7 +102,7 @@ class CategoryControllerTest extends TestCase
         $response->assertSessionHasErrors('name');
     }
 
-    /** @test */
+    #[Test]
     public function ユーザーはカテゴリー編集画面を表示できる(): void
     {
         $user = User::factory()->create();
@@ -113,7 +114,7 @@ class CategoryControllerTest extends TestCase
         $response->assertViewHas('category');
     }
 
-    /** @test */
+    #[Test]
     public function ユーザーはカテゴリーを更新できる(): void
     {
         $user = User::factory()->create();
@@ -129,7 +130,7 @@ class CategoryControllerTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function ユーザーはカテゴリーを削除できる(): void
     {
         $user = User::factory()->create();
@@ -141,7 +142,7 @@ class CategoryControllerTest extends TestCase
         $this->assertDatabaseMissing('categories',['id' => $category->id]);
     }
 
-    /** @test */
+    #[Test]
     public function タスクが紐づいているカテゴリーは削除できない(): void
     {
         $user = User::factory()->create();
