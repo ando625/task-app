@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use App\Models\Category;
 use App\Models\Task;
@@ -13,7 +14,7 @@ class TaskControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    /** @test */
+    #[Test]
     public function ユーザーはタスク一覧を取得できる(): void
     {
         $user = User::factory()->create();
@@ -25,7 +26,7 @@ class TaskControllerTest extends TestCase
         $response->assertViewHas('tasks');
     }
 
-    /** @test */
+    #[Test]
     public function ユーザーはタスク詳細を取得できる(): void
     {
         $user = User::factory()->create();
@@ -37,7 +38,7 @@ class TaskControllerTest extends TestCase
         $response->assertViewHas('task');
     }
 
-    /** @test */
+    #[Test]
     public function ユーザーはタスク作成画面を取得できる(): void
     {
         $user = User::factory()->create();
@@ -47,7 +48,7 @@ class TaskControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    /** @test */
+    #[Test]
     public function ユーザーはタスクを作成できる(): void
     {
         $user = User::factory()->create();
@@ -69,7 +70,7 @@ class TaskControllerTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function タスクタイトルが空だとバリデーションエラーになる(): void
     {
         $user = User::factory()->create();
@@ -85,7 +86,7 @@ class TaskControllerTest extends TestCase
         $response->assertSessionHasErrors('title');
     }
 
-    /** @test */
+    #[Test]
     public function 無効な優先度だとバリデーションエラーになる(): void
     {
         $user = User::factory()->create();
@@ -101,7 +102,7 @@ class TaskControllerTest extends TestCase
         $response->assertSessionHasErrors('priority');
     }
 
-    /** @test */
+    #[Test]
     public function 無効な進捗度だとバリデーションエラーになる(): void
     {
         $user = User::factory()->create();
@@ -117,7 +118,7 @@ class TaskControllerTest extends TestCase
         $response->assertSessionHasErrors('status');
     }
 
-    /** @test */
+    #[Test]
     public function タイトルは255文字まで入力できる(): void
     {
         $user = User::factory()->create();
@@ -138,7 +139,7 @@ class TaskControllerTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[Test]
     public function タイトルが256文字以上だとバリデーションエラーになる(): void
     {
         $user = User::factory()->create();
@@ -154,7 +155,7 @@ class TaskControllerTest extends TestCase
         $response->assertSessionHasErrors('title');
     }
 
-    /** @test */
+    #[Test]
     public function ユーザーはタスク編集画面を表示できる(): void
     {
         $user =User::factory()->create();
@@ -166,7 +167,7 @@ class TaskControllerTest extends TestCase
         $response->assertViewHas('task');
     }
 
-    /** @test */
+    #[Test]
     public function ユーザーはタスクを更新できる(): void
     {
         $user = User::factory()->create();
@@ -191,7 +192,7 @@ class TaskControllerTest extends TestCase
 
     }
 
-    /** @test */
+    #[Test]
     public function ユーザーはタスクを削除できる(): void
     {
         $user = User::factory()->create();
